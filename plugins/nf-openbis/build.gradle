@@ -33,6 +33,12 @@ repositories {
     maven { url = 'https://jitpack.io' }
     maven { url = 'https://s3-eu-west-1.amazonaws.com/maven.seqera.io/releases' }
     maven { url = 'https://s3-eu-west-1.amazonaws.com/maven.seqera.io/snapshots' }
+    ivy { url = 'https://sissource.ethz.ch/openbis/openbis-public/openbis-ivy/-/raw/main/'
+        patternLayout {
+            artifact "[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+            ivy("[organisation]/[module]/[revision]/ivy.xml")
+        }
+    }
 }
 
 configurations {
@@ -59,7 +65,7 @@ dependencies {
     compileOnly 'org.slf4j:slf4j-api:1.7.10'
     compileOnly 'org.pf4j:pf4j:3.4.1'
     // add here plugins depepencies
-
+    implementation 'openbis:openbis-v3-api:20.10.6'
     // test configuration
     testImplementation "org.codehaus.groovy:groovy:3.0.10"
     testImplementation "org.codehaus.groovy:groovy-nio:3.0.10"

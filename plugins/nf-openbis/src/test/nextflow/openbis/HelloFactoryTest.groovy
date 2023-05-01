@@ -14,29 +14,23 @@
  * limitations under the License.
  */
 
-package nextflow.hello
+package nextflow.openbis
 
-import groovy.transform.CompileStatic
-import groovy.util.logging.Slf4j
 import nextflow.Session
-import nextflow.trace.TraceObserver
+import spock.lang.Specification
 
 /**
- * Example workflow events observer
  *
  * @author Paolo Di Tommaso <paolo.ditommaso@gmail.com>
  */
-@Slf4j
-@CompileStatic
-class HelloObserver implements TraceObserver {
+class HelloFactoryTest extends Specification {
 
-    @Override
-    void onFlowCreate(Session session) {
-        log.info "Pipeline is starting! 🚀"
+    def 'should return observer' () {
+        when:
+        def result = new OpenbisFactory().create(Mock(Session))
+        then:
+        result.size()==1
+        result[0] instanceof OpenbisObserver
     }
 
-    @Override
-    void onFlowComplete() {
-        log.info "Pipeline complete! 👋"
-    }
 }

@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-package nextflow.hello
+package nextflow.openbis
 
 import groovy.transform.CompileStatic
 import nextflow.plugin.BasePlugin
-import nextflow.plugin.Scoped
 import org.pf4j.PluginWrapper
 
 /**
- * Implements the Hello plugins entry point
+ * Implements the OpenBIS plugin entry point
  *
- * @author Paolo Di Tommaso <paolo.ditommaso@gmail.com>
+ * @author Simone Baffelli <simone.baffelli@gmail.com>
  */
 @CompileStatic
-class HelloPlugin extends BasePlugin {
+class OpenbisPlugin extends BasePlugin {
 
-    HelloPlugin(PluginWrapper wrapper) {
+    OpenbisPlugin(PluginWrapper wrapper) {
         super(wrapper)
     }
 }

@@ -1,4 +1,4 @@
-package nextflow.hello
+package nextflow.openbis
 
 import nextflow.Channel
 import nextflow.plugin.Plugins
@@ -48,50 +48,22 @@ class HelloDslTest extends Dsl2Spec{
     def cleanup() {
         Plugins.stop()
         PluginExtensionProvider.reset()
-        pluginsMode ? System.setProperty('pf4j.mode',pluginsMode) : System.clearProperty('pf4j.mode')
+        pluginsMode ? System.setProperty('pf4j.mode', pluginsMode) : System.clearProperty('pf4j.mode')
     }
 
     def 'should perform a hi and create a channel' () {
         when:
         def SCRIPT = '''
-            include {reverse} from 'plugin/nf-hello'
-            channel.reverse('hi!') 
+            include {fromCollection} from 'plugin/nf-openbis'
+            channel.fromCollection('/MATERIALS/PLASMIDS/PLASMIDS_COLLECTION', 'test') 
             '''
         and:
-        def result = new MockScriptRunner([hello:[prefix:'>>']]).setScript(SCRIPT).execute()
+        def result = new MockScriptRunner([openbis:[test:[url: 'https://openbis-eln-lims.ethz.ch/', anonymous: true]]]).setScript(SCRIPT).execute()
         then:
-        result.val == 'hi!'.reverse()
         result.val == Channel.STOP
     }
 
-    def 'should store a goodbye' () {
-        when:
-        def SCRIPT = '''
-            include {goodbye} from 'plugin/nf-hello'
-            channel
-                .of('folks')
-                .goodbye() 
-            '''
-        and:
-        def result = new MockScriptRunner([:]).setScript(SCRIPT).execute()
-        then:
-        result.val == 'Goodbye folks'
-        result.val == Channel.STOP
-        
-    }
 
-    def 'can use an imported function' () {
-        when:
-        def SCRIPT = '''
-            include {randomString} from 'plugin/nf-hello'
-            channel
-                .of( randomString(20) )                
-            '''
-        and:
-        def result = new MockScriptRunner([:]).setScript(SCRIPT).execute()
-        then:
-        result.val.size() == 20
-        result.val == Channel.STOP
-    }
+
 
 }

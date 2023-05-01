@@ -1,12 +1,9 @@
-# nf-hello plugin 
+# nf-openBIS Plugin 
  
-This project shows how to implement a simple Nextflow plugin named `nf-hello` which intercepts workflow execution events to print a message when the execution starts and on workflow completion.
+This project implements a nextflow plugin offering `channel` factories emitting and consuming [openBIS](https://openbis.ch/) objects.
 
-The `nf-hello` plugin also enriches the `channel` object with a `producer` and `consumer` method (`reverse` and `goodbye`) which can be used in a pipeline script.
 
-Also exposes some @FunctionS to be used in the pipeline as custom methods 
-
-   NOTE: this repo uses the name `nf-hello` as root name. In case you want to use this repo as starting point for a custom plugin, you need at least to change `settings.gradle` and rename `plugins/nf-hello` folder.
+NOTE: this repo is based on `nf-hello`. Documentation and certain files reflect this.
 
 ## Plugin structure
                     
@@ -24,7 +21,7 @@ Also exposes some @FunctionS to be used in the pipeline as custom methods
 
 - `plugins/nf-hello/src/resources/META-INF/MANIFEST.MF` 
     
-    Manifest file defining the plugin attributes e.g. name, version, etc. The attribute `Plugin-Class` declares the plugin main class. This class should extend the base class `nextflow.plugin.BasePlugin` e.g. `nextflow.hello.HelloPlugin`.
+    Manifest file defining the plugin attributes e.g. name, version, etc. The attribute `Plugin-Class` declares the plugin main class. This class should extend the base class `nextflow.plugin.BasePlugin` e.g. `nextflow.openbis.OpenbisPlugin`.
 
 - `plugins/nf-hello/src/resources/META-INF/extensions.idx`
     
